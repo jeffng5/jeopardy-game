@@ -1,20 +1,23 @@
 table{
     color: whitesmoke;
     background-color: blue;
-    font-size: 20px;
+    font-size: 10px;
     font-family: 'Trebuchet MS';
     padding: 10px;
     padding-right: 20px;
     padding-left: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-
+ 
 }
 
 td {
 padding: 15px;
 outline: 2px solid black;
 text-align: center;
+height: 70px;
+width: 150px;
+
 }
 
 tr {
