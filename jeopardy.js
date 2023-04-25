@@ -1,3 +1,4 @@
+//API request
 async function getQuestions(){
     const response = await axios.get('http://jservice.io/api/categories?count='+20)
     console.log(response)
@@ -8,13 +9,13 @@ async function getQuestions(){
     const resp = await axios.get('http://jservice.io/api/category?id='+key)
     unfilteredList.push(resp)};
     
-    //GENERATE RANDOM INTEGERS
+//GENERATE RANDOM INTEGERS
     randomInt=[]
     for (let i=0; i<20; i++){
     randomInt.push(Math.floor(Math.random() * 20))}
     let randomInt1= Array.from(new Set (randomInt))
     let randomInt2=randomInt1.slice(0,6)
-    
+//creating the column heading/categories    
     container=[]
     for (let x of randomInt2) {
         let td = document.createElement('td')
@@ -40,12 +41,14 @@ console.log(unfilteredList)
 
 allJeopardyQuestions=[]
 for (let x of randomInt2) {allJeopardyQuestions.push(unfilteredList[x])}
-console.log(allJeopardyQuestions)
 
+//constructing the rows of teh gameboard
     for (let i=0; i<5; i++){
     let tbody=document.querySelector('tbody')
+//creating row tags and putting data cells in each row 
     let trs= document.createElement('tr')
-     for (let i=0; i<6; i++){
+//creating 6 rows 
+    for (let i=0; i<6; i++){
          let tds= document.createElement('td')
          trs.append(tds)
             }
@@ -55,7 +58,8 @@ console.log(allJeopardyQuestions)
     $('tr').eq(i).addClass('questions'+[i])}
 
 
-for (let i =0; i<6; i++){
+//making the table or gameboard
+    for (let i =0; i<6; i++){
     $('.questions1 td').get(i).append("?")}              
     for (let i =0; i<6; i++){
     $('.questions2 td').get(i).append("?")}
@@ -72,7 +76,7 @@ for (let i =0; i<6; i++){
 
 
 
-
+//allJeopardyQuestions divided up by category, question and answer
 const cat1q1 = {q: allJeopardyQuestions[0].data.clues[0].question,
                  a: allJeopardyQuestions[0].data.clues[0].answer}
 const cat2q1 = {q: allJeopardyQuestions[1].data.clues[0].question,
@@ -243,7 +247,7 @@ obj29.addEventListener('dblclick', function(e){e.preventDefault(); obj29.innerHT
 
 
 
-
+//event Listener button to set up the screen '1885' is not a good category since it only as 2 questions, only bug in program
 let resetButton= document.querySelector('button')
 resetButton.addEventListener("click", function(e){e.preventDefault(); 
     getQuestions()})
