@@ -1,18 +1,24 @@
 async function getQuestions(){
-    const response = await axios.get('http://jservice.io/api/categories?count='+6)
+    const response = await axios.get('http://jservice.io/api/categories?count='+20)
     console.log(response)
     categoryKey=[]
-    for (let i =0; i<6; i++) {categoryKey.push(response.data[i].id)}
-    allJeopardyQuestions=[]
+    for (let i =0; i<20; i++) {categoryKey.push(response.data[i].id)}
+    unfilteredList=[]
     for (key of categoryKey){
     const resp = await axios.get('http://jservice.io/api/category?id='+key)
-    allJeopardyQuestions.push(resp)}; 
+    unfilteredList.push(resp)};
     
+    //GENERATE RANDOM INTEGERS
+    randomInt=[]
+    for (let i=0; i<20; i++){
+    randomInt.push(Math.floor(Math.random() * 20))}
+    let randomInt1= Array.from(new Set (randomInt))
+    let randomInt2=randomInt1.slice(0,6)
     
     container=[]
-    for (let i=0; i<6; i++) {
+    for (let x of randomInt2) {
         let td = document.createElement('td')
-        td.append(response.data[i].title)
+        td.append(response.data[x].title)
         container.push(td); 
     
         }
@@ -29,7 +35,13 @@ async function getQuestions(){
     ele.innerHTML += '<tr id="heading"></tr>'
     
     
-    console.log(allJeopardyQuestions)
+console.log(unfilteredList)
+// GET ROWS FROM UNFILTERED LIST
+
+allJeopardyQuestions=[]
+for (let x of randomInt2) {allJeopardyQuestions.push(unfilteredList[x])}
+console.log(allJeopardyQuestions)
+
     for (let i=0; i<5; i++){
     let tbody=document.querySelector('tbody')
     let trs= document.createElement('tr')
