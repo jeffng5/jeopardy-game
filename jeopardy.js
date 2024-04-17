@@ -1,20 +1,24 @@
 //API request
 async function getQuestions(){
-    const response = await axios.get('http://jservice.io/api/categories?count='+20)
+    baseUrl = "https://jeopardy-api-08c22fd2e683.herokuapp.com";
+    const response = await axios.get(`${baseUrl}/api/categories`, { headers: { 'Content-Type' : 'application/json' },
+        params: { count: 6 } } )
+        
+                                                                   )
     console.log(response)
-    categoryKey=[]
-    for (let i =0; i<20; i++) {categoryKey.push(response.data[i].id)}
-    unfilteredList=[]
-    for (key of categoryKey){
-    const resp = await axios.get('http://jservice.io/api/category?id='+key)
-    unfilteredList.push(resp)};
+    // categoryKey=[]
+    // for (let i =0; i<20; i++) {categoryKey.push(response.data[i].id)}
+    // unfilteredList=[]
+    // for (key of categoryKey){
+    // const resp = await axios.get('http://jservice.io/api/category?id='+key)
+    // unfilteredList.push(resp)};
     
-//GENERATE RANDOM INTEGERS
-    randomInt=[]
-    for (let i=0; i<20; i++){
-    randomInt.push(Math.floor(Math.random() * 20))}
-    let randomInt1= Array.from(new Set (randomInt))
-    let randomInt2=randomInt1.slice(0,6)
+// //GENERATE RANDOM INTEGERS
+//     randomInt=[]
+//     for (let i=0; i<20; i++){
+//     randomInt.push(Math.floor(Math.random() * 20))}
+//     let randomInt1= Array.from(new Set (randomInt))
+//     let randomInt2=randomInt1.slice(0,6)
 //creating the column heading/categories    
     container=[]
     for (let x of randomInt2) {
@@ -47,7 +51,7 @@ for (let x of randomInt2) {allJeopardyQuestions.push(unfilteredList[x])}
     let tbody=document.querySelector('tbody')
 //creating row tags and putting data cells in each row 
     let trs= document.createElement('tr')
-//creating 6 rows 
+//creating 6 columns 
     for (let i=0; i<6; i++){
          let tds= document.createElement('td')
          trs.append(tds)
