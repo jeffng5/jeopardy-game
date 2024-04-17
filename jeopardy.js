@@ -4,7 +4,7 @@ async function getQuestions(){
     const response = await axios.get(`${baseUrl}/api/categories`, { headers: { 'Content-Type' : 'application/json' },
         params: { count: 6 } } )
         
-                                                                   )
+                                                                   
     console.log(response)
     // categoryKey=[]
     // for (let i =0; i<20; i++) {categoryKey.push(response.data[i].id)}
